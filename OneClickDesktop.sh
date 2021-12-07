@@ -539,9 +539,12 @@ function install_vnc
 	cat > $HomeDir/.vnc/xstartup <<END
 
 #!/bin/bash
-
-xrdb $HomeDir/.Xresources
-gnome-session &
+xrdb $HOME/.Xresources
+xsetroot -solid grey
+# Fix to make GNOME work
+export XKL_XMODMAP_DISABLE=1
+unset DBUS_SESSION_BUS_ADDRESS
+gnome-session --disable-acceleration-check --debug &
 END
 	cat > /etc/systemd/system/vncserver@.service <<END
 [Unit]
