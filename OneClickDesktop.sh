@@ -519,17 +519,20 @@ function install_vnc
 	echo 
 	if [ "$OS" = "DEBIAN10" ] ; then
 		apt-get install gnome-desktop-environment wget firefox-esr tigervnc-standalone-server tigervnc-common xfonts-100dpi xfonts-100dpi-transcoded xfonts-75dpi xfonts-75dpi-transcoded xfonts-base -y
-		wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-		apt install ./google-chrome-stable_current_amd64.deb
+		
 	else 
 		apt-get install xfce4 xfce4-goodies firefox tigervnc-standalone-server tigervnc-common -y
 	fi
 	say @B"Desktop, browser, and VNC server successfully installed." green
 	echo "Starting to configure VNC server..."
 	sleep 2
-	echo 
+	echo "downloading chrome..."
+	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+	apt-get install ./google-chrome-stable_current_amd64.deb -y
+	echo
 	mkdir $HomeDir/.vnc
 	cat > $HomeDir/.vnc/xstartup <<END
+
 #!/bin/bash
 
 xrdb $HomeDir/.Xresources
