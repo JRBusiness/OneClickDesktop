@@ -518,7 +518,7 @@ function install_vnc
 	read catch_all
 	echo 
 	if [ "$OS" = "DEBIAN10" ] ; then
-		apt-get install gnome-desktop-environment wget firefox-esr tigervnc-standalone-server tigervnc-common xfonts-100dpi xfonts-100dpi-transcoded xfonts-75dpi xfonts-75dpi-transcoded xfonts-base -y
+		apt-get install gnome-desktop-environment wget firefox-esr tigervnc-standalone-server tigervnc-common -y
 		
 	else 
 		apt-get install xfce4 xfce4-goodies firefox tigervnc-standalone-server tigervnc-common -y
@@ -529,7 +529,12 @@ function install_vnc
 	echo "downloading chrome..."
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 	apt-get install ./google-chrome-stable_current_amd64.deb -y
-	echo
+	echo "install font.."
+	apt-get install xfonts-100dpi -y
+	apt-get install xfonts-100dpi-transcoded  -y
+	apt-get install xfonts-75dpi -y
+	apt-get install xfonts-75dpi-transcoded -y
+	apt-get install xfonts-base -y
 	mkdir $HomeDir/.vnc
 	cat > $HomeDir/.vnc/xstartup <<END
 
